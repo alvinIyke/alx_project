@@ -19,7 +19,7 @@ const App = () => {
       <div className={`min-h-screen flex flex-col ${darkMode ? 'dark' : ''}`}>
        <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
        <Nav />
-       
+       <MovieGrid />
       </div>
     </BrowserRouter>
   )
