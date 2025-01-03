@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 //TMDb API key
-const API_KEY = '&api_key=e82851bccb823fad06989d22f76869b8';
+const API_KEY = 'f76055305518a8c6392aa20a8f215f24';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-const MovieGrid = () => {
+const MovieGrid = ({ movie }) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,19 +26,19 @@ const MovieGrid = () => {
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch data');
-        setLoading(false);
+        setLoading(false); 
       }
     };
- // fetch movies when page loads
+ // fetch movies once when page loads
     fetchMovies();
   }, []);
 
-  if (loading) return <p className="text-center text-xl">Loading...</p>;
-  if (error) return <p  className="text-center text-xl text-red-500">{error}</p>;
+ /* if (loading) return <p className="text-center text-xl">Loading...</p>;*/
+ /* if (error) return <p  className="text-center text-xl text-red-500">{error}</p>;*/
 
   return (
     <div className="App container mx-auto p-4">
-      <h1  className="text-3xl font-bold text-center text-gray-800 mb-8">Popular Movies</h1>
+      <h1  className="text-3xl font-bold text-center text-green-600 mb-8">Popular Movies</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {movies.map((movie) => (
           <div key={movie.id} className="movie-item  bg-white rounded-lg shadow-lg overflow-hidden">
@@ -47,9 +47,9 @@ const MovieGrid = () => {
               alt={movie.title}
               className="w-full h-80 object-cover"
             />
-            <h2>{movie.title}</h2>
-            <p>{movie.release_date}</p>
-            <p>{movie.overview}</p>
+            <h2 className="text-xl font-semibold text-gray-800 p-4">{movie.title}</h2>
+            <p className="text-sm text-gray-600 p-4">{movie.release_date}</p>
+            <p className="text-sm text-gray-500 mt-2 p-4">{movie.overview}</p>
           </div>
         ))}
       </div>

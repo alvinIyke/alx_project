@@ -4,7 +4,7 @@ import axios from 'axios';
 const API_KEY = '&api_key=e82851bccb823fad06989d22f76869b8';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-
+function SearchBar(){
 const [searchQuery, setSearchQuery] = useState('');
 const [searching, setSearching] = useState(false);
 const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ const [error, setError] = useState(null);
 
 
   
-export const searchMovies = async () => {
+ const searchMovies = async () => {
     if (!searchQuery) {
       return; // Don't search if query is empty
     }
@@ -74,5 +74,7 @@ export const searchMovies = async () => {
       </button>
       </div>
     </div>  
-)
+);
+}
+export default SearchBar;
     
