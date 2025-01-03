@@ -5,7 +5,7 @@ const API_KEY = 'f76055305518a8c6392aa20a8f215f24';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 function SearchBar(){
-const [searchQuery, setSearchQuery] = useState('');
+const [searchQuery, setSearchQuery] = useState(''); // Holds value of input field as user types
 const [searching, setSearching] = useState(false);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
@@ -50,9 +50,9 @@ const [error, setError] = useState(null);
     searchMovies();
   };
 
-  if (loading) return <p className="text-center text-xl">Loading...</p>;
+ /* if (loading) return <p className="text-center text-xl">Loading...</p>;
   if (error) return <p className="text-center text-xl text-red-500">{error}</p>;
-
+*/
   return (
     <div className="App container mx-auto p-4">
 
@@ -63,16 +63,18 @@ const [error, setError] = useState(null);
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder="Search for a movie..."
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
         />
       </form>
       <button
         onClick={searchMovies}
-        className="px-4 py-2 text-center mb-6 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+        className="px-4 py-4 text-center mb-6 bg-green-600 hover:bg-green-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
       >
         Search
       </button>
       </div>
+
+      { searching && <p className="text-center text-xl mt-4">Searching...</p> }
     </div>  
 );
 }
