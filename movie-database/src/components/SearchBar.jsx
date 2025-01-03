@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const API_KEY = '&api_key=e82851bccb823fad06989d22f76869b8';
+const API_KEY = 'f76055305518a8c6392aa20a8f215f24';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 function SearchBar(){
