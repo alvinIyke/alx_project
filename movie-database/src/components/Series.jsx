@@ -3,42 +3,42 @@ import axios from 'axios';
 import { BASE_URL, API_KEY } from '../services/api';
 
 
-const MovieGrid = ({ movie }) => {
-  const [movies, setMovies] = useState([]);
+const Series = () => {
+  const [series, setSeries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Fetch popular movies when the component mounts
   useEffect(() => {
-    const fetchMovies = async () => {   // function to make GET request to the popular movie endpoint
+    const fetchSeries = async () => {   // function to make GET request to the popular series endpoint
       try {
         setLoading(true);
-        const response = await axios.get(`${BASE_URL}/trending/movie/day?language=en-US`, {
+        const response = await axios.get(`${BASE_URL}/tv/popular`, {
           params: {
             api_key: API_KEY,
             language: 'en-US',
             page: 1,
           },
         });
-        setMovies(response.data.results);
+        setSeries(response.data.results);
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch data');
         setLoading(false); 
       }
     };
- // fetch movies once when page loads
-    fetchMovies();
+ // fetch series once when page loads
+    fetchSeries();
   }, []);
 
  /* if (loading) return <p className="text-center text-xl">Loading...</p>;*/
  /* if (error) return <p  className="text-center text-xl text-red-500">{error}</p>;*/
 
   return (
-    <div className="App container mx-auto p-4" id="movies">
-      <h1  className="text-3xl font-bold text-center text-green-600 mb-8">Popular Movies</h1>
+    <div className="App container mx-auto p-4" id="series">
+      <h1  className="text-3xl font-bold text-center text-green-600 mb-8">Popular Series</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {movies.map((movie) => (
+        {series.map((movie) => (
           <div key={movie.id} className="movie-item  bg-white rounded-lg shadow-lg overflow-hidden">
             <img
               src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -55,4 +55,4 @@ const MovieGrid = ({ movie }) => {
   );
 };
 
-export default MovieGrid;
+export default Series;

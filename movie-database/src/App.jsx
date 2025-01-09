@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import MovieGrid from './components/MovieGrid';
 import SearchBar from './components/SearchBar';
 import Footer from './components/Footer';
+import Series from './components/Series';
 import './index.css';
 
 
@@ -22,6 +23,7 @@ const App = () => {
        <Nav />
        <SearchBar  toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
        <MovieGrid />
+       <Series />
        <Footer  toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
       </div>
     </BrowserRouter>

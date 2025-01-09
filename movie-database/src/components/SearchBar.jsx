@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_KEY } from "../services/api.js"
 
-const API_KEY = 'f76055305518a8c6392aa20a8f215f24';
+//const API_KEY = 'f76055305518a8c6392aa20a8f215f24';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 function SearchBar(){
+const [movies, setMovies] = useState([]);  
 const [searchQuery, setSearchQuery] = useState(''); // Holds value of input field as user types
 const [searching, setSearching] = useState(false);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 
-
+console.log(movies)
   
  const searchMovies = async () => {
     if (!searchQuery) {
@@ -22,7 +24,7 @@ const [error, setError] = useState(null);
     setError(null);
 
     try {
-      const response = await axios.get(`${BASE_URL}/search/movie`, {
+      const response = await axios.get(`${BASE_URL}/search/multi?include_adult=false&language=en-US&page=1&query=${searchQuery}`, {
         params: {
           api_key: API_KEY,
           query: searchQuery,
@@ -41,7 +43,8 @@ const [error, setError] = useState(null);
     }
   };
     //updates the searchQuery as the user types 
-  const handleSearchChange = (e) => {
+    const handleSearchChange = (e) => {
+      !e.target.value && setMovies([])
     setSearchQuery(e.target.value);
   };
    //triggers the search when user hits search button
@@ -73,7 +76,20 @@ const [error, setError] = useState(null);
         Search
       </button>
       </div>
-
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {movies.map((movie) => (
+          <div key={movie.id} className="movie-item  bg-white rounded-lg shadow-lg overflow-hidden">
+            <img
+              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+              alt={movie.title}
+              className="w-full h-80 object-cover"
+            />
+            <h2 className="text-xl font-semibold text-gray-800 p-4">{movie.title}</h2>
+            <p className="text-sm text-gray-600 p-4">{movie.release_date}</p>
+            <p className="text-sm text-gray-500 mt-2 p-4">{movie.overview}</p>
+          </div>
+        ))}
+      </div>
       { searching && <p className="text-center text-xl mt-4">Searching...</p> }
     </div>  
 );
